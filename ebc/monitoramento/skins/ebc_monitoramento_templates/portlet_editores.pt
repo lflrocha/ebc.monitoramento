@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+xmlns:tal="http://xml.zope.org/namespaces/tal"
+xmlns:metal="http://xml.zope.org/namespaces/metal"
+xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+i18n:domain="plone">
+
+<body>
+
+<!-- The Favorites Box -->
+
+    <div metal:define-macro="portlet">
+
+        <dl class="portlet">
+
+            <dt class="portletHeader">
+                <span class="portletTopLeft"></span>
+                Aguardando revisão:
+                <span class="portletTopRight"></span>
+            </dt>
+
+            <dd class="portletItem odd"
+                tal:define="noticias context/getAguardandoRevisao">
+                <ul>
+                    <li tal:repeat="noticia noticias">
+<a tal:attributes="href noticia/getURL" tal:content="string:${noticia/getHoraStr} - ${noticia/Title}" />
+</li>
+
+                </ul>
+                <span class="portletBottomLeft"></span>
+                <span class="portletBottomRight"></span>
+            </dd>
+
+        </dl>
+
+    </div>
+
+</body>
+
+</html>
