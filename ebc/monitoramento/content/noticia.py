@@ -27,13 +27,25 @@ NoticiaSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         ),
     ),
 
-    atapi.StringField(
+    atapi.LinesField(
+        'editoria',
+        storage=atapi.AnnotationStorage(),
+        widget=atapi.SelectionWidget(
+            label=_(u"Editoria"),
+        ),
+        vocabulary=NamedVocabulary("""editoria"""),
+        required=True,
+    ),
+
+    atapi.LinesField(
         'veiculo',
         storage=atapi.AnnotationStorage(),
-        widget=atapi.StringWidget(
+        widget=atapi.SelectionWidget(
             label=_(u"Veículo"),
             size=80,
         ),
+        vocabulary=NamedVocabulary("""veiculo"""),
+        required=True,        
     ),
 
     atapi.TextField(
@@ -122,6 +134,7 @@ class Noticia(base.ATCTContent):
 
     # -*- Your ATSchema to Python Property Bridges Here ... -*-
     link = atapi.ATFieldProperty('link')
+    editoria = atapi.ATFieldProperty('editoria')
     veiculo = atapi.ATFieldProperty('veiculo')
     sutia = atapi.ATFieldProperty('sutia')
     data = atapi.ATFieldProperty('data')
