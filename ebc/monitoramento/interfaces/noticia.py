@@ -15,6 +15,12 @@ class INoticia(Interface):
         required=False,
     )
 #
+    editoria = schema.List(
+        title=_(u"Editoria"),
+        required=True,
+        description=_(u"Field description"),
+    )
+#
     noticia = schema.Text(
         title=_(u"Noticia"),
         required=False,
@@ -35,7 +41,7 @@ class INoticia(Interface):
         required=False,
     )
 #
-    veiculo = schema.TextLine(
+    veiculo = schema.SelectLine(
         title=_(u"Veiculo"),
         required=True,
     )
