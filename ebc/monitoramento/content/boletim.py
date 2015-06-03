@@ -93,7 +93,7 @@ schemata.finalizeATCTSchema(BoletimSchema, moveDiscussion=False)
 
 
 class Boletim(base.ATCTContent):
-    """Description of the Example Type"""
+    """ """
     implements(IBoletim)
 
     meta_type = "Boletim"
