@@ -9,6 +9,11 @@ from Products.Archetypes import atapi
 from Products.ATContentTypes.content import base
 from Products.ATContentTypes.content import schemata
 
+from Products.ATVocabularyManager import NamedVocabulary
+from Products.Archetypes.public import DisplayList
+from Products.CMFCore.utils import getToolByName
+
+
 # -*- Message Factory Imported Here -*-
 from ebc.monitoramento import monitoramentoMessageFactory as _
 from ebc.monitoramento.interfaces import INoticia
@@ -25,6 +30,7 @@ NoticiaSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             label=_(u"Link"),
             size=80,            
         ),
+        validators=('isURL',)
     ),
 
     atapi.LinesField(
@@ -34,7 +40,6 @@ NoticiaSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             label=_(u"Editoria"),
         ),
         vocabulary=NamedVocabulary("""editoria"""),
-        required=True,
     ),
 
     atapi.LinesField(
@@ -44,8 +49,7 @@ NoticiaSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             label=_(u"Veículo"),
             size=80,
         ),
-        vocabulary=NamedVocabulary("""veiculo"""),
-        required=True,        
+        vocabulary=NamedVocabulary("""veiculo"""),        
     ),
 
     atapi.TextField(
@@ -123,7 +127,7 @@ schemata.finalizeATCTSchema(NoticiaSchema, moveDiscussion=False)
 
 
 class Noticia(base.ATCTContent):
-    """Description of the Example Type"""
+    """ """
     implements(INoticia)
 
     meta_type = "Noticia"
@@ -149,5 +153,26 @@ class Noticia(base.ATCTContent):
 
     def getHoraStr(self):
         return self.getData().strftime("%H:%M")
+
+    def getEditoriaStr(self):
+        atvm = getToolByName(self, 'portal_vocabularies')
+        vocab = atvm.getVocabularyByName('editoria')
+        dict = vocab.getVocabularyDict(self)
+        editoria = self.getEditoria()
+        t = ""
+        if editoria:
+            t = dict[editoria[0]]
+        return t
+
+    def getVeiculoStr(self):
+        atvm = getToolByName(self, 'portal_vocabularies')
+        vocab = atvm.getVocabularyByName('veiculo')
+        dict = vocab.getVocabularyDict(self)
+        veiculo = self.getVeiculo()
+        t = ""
+        if veiculo:
+            t = dict[veiculo[0]]  
+        return t
+
 
 atapi.registerType(Noticia, PROJECTNAME)
