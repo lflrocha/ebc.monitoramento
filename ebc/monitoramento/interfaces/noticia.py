@@ -41,7 +41,7 @@ class INoticia(Interface):
         required=False,
     )
 #
-    veiculo = schema.SelectLine(
+    veiculo = schema.List(
         title=_(u"Veiculo"),
         required=True,
     )

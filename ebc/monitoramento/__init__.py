@@ -13,6 +13,10 @@ from Products.CMFCore import utils
 
 monitoramentoMessageFactory = MessageFactory('ebc.monitoramento')
 
+from Products.validation import validation
+from validator import UnicoValidator
+validation.register(UnicoValidator('isUnico'))
+
 
 def initialize(context):
     """Initializer called when used as a Zope 2 product.

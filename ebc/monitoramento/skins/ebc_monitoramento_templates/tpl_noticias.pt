@@ -42,6 +42,7 @@
                         <th>Status</th>
                         <th>Hora</th>
                         <th>Veículo</th>
+                        <th>Editoria</th>                        
                         <th>Manchete</th>
                     </tr>
                 </thead>
@@ -51,7 +52,8 @@
                     <tr>
                         <td><span tal:replace="noticia/review_state" /></td>
                         <td><span tal:replace="noticia/getHoraStr" /></td>
-                        <td><span tal:replace="noticia/getVeiculo" /></td>
+                        <td><span tal:replace="noticia/getVeiculoStr" /></td>
+                        <td><span tal:replace="noticia/getEditoriaStr" /></td>                        
                         <td><a tal:attributes="href string:${context/portal_url}/noticias/${noticia/id}" tal:content="noticia/Title" /></td>
                     </tr>
                 </tal:rep>
@@ -67,7 +69,7 @@
                     "searching": false,
                     "info":     false,
                     "order": [[ 1, "desc" ]],
-                    "columns": [{ "width": "10%" },{ "width": "10%", "className": "centro" },{ "width": "15%" },{ "width": "65%"}]
+                    "columns": [{ "width": "10%" },{ "width": "10%", "className": "centro" },{ "width": "10%" },{ "width": "10%" },{ "width": "60%"}]
                 } );
             } );
 

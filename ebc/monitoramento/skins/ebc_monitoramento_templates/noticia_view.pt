@@ -22,7 +22,7 @@
 
 
         <div class="field veiculo">
-          <span tal:replace="structure here/getVeiculo" />
+          <span tal:replace="structure here/getVeiculoStr" />
         </div>
 
         <div class="field manchete">
@@ -34,6 +34,7 @@
         </div>
 
         <div class="field hora">
+          <span tal:replace="structure here/getEditoriaStr" /><br />            
           <span tal:replace="here/getDataStr" /> - 
           <span tal:replace="here/getHoraStr" /><br>
           <span tal:replace="structure here/getReporter" />
