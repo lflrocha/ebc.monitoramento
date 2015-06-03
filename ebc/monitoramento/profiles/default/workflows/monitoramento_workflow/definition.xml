@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<dc-workflow workflow_id="monitoramento_workflow" title="Monitoramento Workflow" description="" state_variable="review_state" initial_state="em_criacao" manager_bypass="False">
+ <permission>Access contents information</permission>
+ <permission>Change portal events</permission>
+ <permission>Modify portal content</permission>
+ <permission>View</permission>
+ <state state_id="aguardando_cadastramento" title="Aguardando cadastramento">
+  <exit-transition transition_id="retirar"/>
+  <exit-transition transition_id="revisao"/>
+  <group-map name="Editores">
+   <group-role>Editor</group-role>
+   <group-role>Reviewer</group-role>
+  </group-map>
+  <group-map name="Publicadores">
+   <group-role>Editor</group-role>
+   <group-role>Reviewer</group-role>
+  </group-map>
+ </state>
+ <state state_id="aguardando_revisao" title="Aguardando revisão">
+  <exit-transition transition_id="cadastro"/>
+  <exit-transition transition_id="liberar"/>
+  <exit-transition transition_id="retirar"/>
+  <group-map name="Editores">
+   <group-role>Editor</group-role>
+   <group-role>Reviewer</group-role>
+  </group-map>
+ </state>
+ <state state_id="em_criacao" title="Privado">
+  <exit-transition transition_id="cadastro"/>
+  <exit-transition transition_id="liberar"/>
+  <exit-transition transition_id="revisao"/>
+  <group-map name="Editores">
+   <group-role>Editor</group-role>
+   <group-role>Reviewer</group-role>
+  </group-map>
+  <group-map name="Publicadores">
+   <group-role>Editor</group-role>
+   <group-role>Reviewer</group-role>
+  </group-map>
+ </state>
+ <state state_id="liberado" title="Liberado">
+  <exit-transition transition_id="retirar"/>
+  <exit-transition transition_id="revisao"/>
+  <group-map name="Editores">
+   <group-role>Contributor</group-role>
+   <group-role>Editor</group-role>
+   <group-role>Reviewer</group-role>
+  </group-map>
+ </state>
+ <transition transition_id="cadastro" title="Solicitar cadastramento" new_state="aguardando_cadastramento" trigger="USER" before_script="" after_script="">
+  <action url="%(content_url)s/content_status_modify?workflow_action=cadastro" category="workflow" icon="">Solicitar cadastramento</action>
+  <guard>
+   <guard-permission>Review portal content</guard-permission>
+   <guard-group>Editores</guard-group>
+   <guard-group>Administrators</guard-group>
+  </guard>
+ </transition>
+ <transition transition_id="liberar" title="Liberar para envio" new_state="liberado" trigger="USER" before_script="" after_script="">
+  <action url="%(content_url)s/content_status_modify?workflow_action=liberar" category="workflow" icon="">Liberar</action>
+  <guard>
+   <guard-permission>Review portal content</guard-permission>
+   <guard-group>Editores</guard-group>
+   <guard-group>Administrators</guard-group>
+  </guard>
+ </transition>
+ <transition transition_id="retirar" title="Privado" new_state="em_criacao" trigger="USER" before_script="" after_script="">
+  <action url="%(content_url)s/content_status_modify?workflow_action=retirar" category="workflow" icon="">Retornar para privado</action>
+  <guard>
+   <guard-permission>Review portal content</guard-permission>
+   <guard-group>Editores</guard-group>
+   <guard-group>Administrators</guard-group>
+  </guard>
+ </transition>
+ <transition transition_id="revisao" title="Solicitar revisão" new_state="aguardando_revisao" trigger="USER" before_script="" after_script="">
+  <action url="%(content_url)s/content_status_modify?workflow_action=revisao" category="workflow" icon="">Solicitar revisão</action>
+  <guard>
+   <guard-permission>Review portal content</guard-permission>
+   <guard-group>Publicadores</guard-group>
+   <guard-group>Administrators</guard-group>
+  </guard>
+ </transition>
+ <worklist worklist_id="cadastramento" title="">
+  <description>Aguardando cadastramento</description>
+  <action url="" category="global" icon="">Aguardando Cadastramento</action>
+  <guard>
+   <guard-permission>Review portal content</guard-permission>
+   <guard-group>Publicadores</guard-group>
+   <guard-group>Administrators</guard-group>
+  </guard>
+  <match name="review_state" values="aguardando_cadastramento"/>
+ </worklist>
+ <worklist worklist_id="revisao" title="">
+  <description>Aguardando revisão</description>
+  <action url="" category="global" icon="">Aguardando Revisão</action>
+  <guard>
+   <guard-permission>Review portal content</guard-permission>
+   <guard-group>Editores</guard-group>
+   <guard-group>Administrators</guard-group>
+  </guard>
+  <match name="review_state" values="aguardando_revisao"/>
+ </worklist>
+ <variable variable_id="action" for_catalog="False" for_status="True" update_always="True">
+  <description>Previous transition</description>
+  <default>
+   
+   <expression>transition/getId|nothing</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="actor" for_catalog="False" for_status="True" update_always="True">
+  <description>The ID of the user who performed the previous transition</description>
+  <default>
+   
+   <expression>user/getId</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="comments" for_catalog="False" for_status="True" update_always="True">
+  <description>Comment about the last transition</description>
+  <default>
+   
+   <expression>python:state_change.kwargs.get('comment', '')</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="review_history" for_catalog="False" for_status="False" update_always="False">
+  <description>Provides access to workflow history</description>
+  <default>
+   
+   <expression>state_change/getHistory</expression>
+  </default>
+  <guard>
+   <guard-permission>Request review</guard-permission>
+   <guard-permission>Review portal content</guard-permission>
+  </guard>
+ </variable>
+ <variable variable_id="time" for_catalog="False" for_status="True" update_always="True">
+  <description>When the previous transition was performed</description>
+  <default>
+   
+   <expression>state_change/getDateTime</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+</dc-workflow>

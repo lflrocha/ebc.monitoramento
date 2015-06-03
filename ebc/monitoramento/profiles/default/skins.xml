@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<object name="portal_skins" allow_any="False" cookie_persistence="False"
+   default_skin="EBC Monitoramento">
+
+ <object name="ebc_monitoramento_images"
+    meta_type="Filesystem Directory View"
+    directory="ebc.monitoramento:skins/ebc_monitoramento_images"/>
+ <object name="ebc_monitoramento_templates"
+    meta_type="Filesystem Directory View"
+    directory="ebc.monitoramento:skins/ebc_monitoramento_templates"/>
+
+
+ <skin-path name="EBC Monitoramento" based-on="Sunburst Theme">
+  <layer name="ebc_monitoramento_images"
+     insert-after="custom"/>
+  <layer name="ebc_monitoramento_templates"
+     insert-after="ebc_monitoramento_images"/>
+ </skin-path>
+
+</object>
