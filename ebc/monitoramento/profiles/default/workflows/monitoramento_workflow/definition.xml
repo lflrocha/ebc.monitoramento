@@ -47,7 +47,7 @@
    <group-role>Reviewer</group-role>
   </group-map>
  </state>
- <transition transition_id="cadastro" title="Solicitar cadastramento" new_state="aguardando_cadastramento" trigger="USER" before_script="" after_script="">
+ <transition transition_id="cadastro" title="Solicitar cadastramento" new_state="aguardando_cadastramento" trigger="USER" before_script="" after_script="moveBackObject">
   <action url="%(content_url)s/content_status_modify?workflow_action=cadastro" category="workflow" icon="">Solicitar cadastramento</action>
   <guard>
    <guard-permission>Review portal content</guard-permission>
@@ -55,7 +55,7 @@
    <guard-group>Administrators</guard-group>
   </guard>
  </transition>
- <transition transition_id="liberar" title="Liberar para envio" new_state="liberado" trigger="USER" before_script="" after_script="">
+ <transition transition_id="liberar" title="Liberar para envio" new_state="liberado" trigger="USER" before_script="" after_script="moveObject">
   <action url="%(content_url)s/content_status_modify?workflow_action=liberar" category="workflow" icon="">Liberar</action>
   <guard>
    <guard-permission>Review portal content</guard-permission>
@@ -63,7 +63,7 @@
    <guard-group>Administrators</guard-group>
   </guard>
  </transition>
- <transition transition_id="retirar" title="Privado" new_state="em_criacao" trigger="USER" before_script="" after_script="">
+ <transition transition_id="retirar" title="Privado" new_state="em_criacao" trigger="USER" before_script="" after_script="moveBackObject">
   <action url="%(content_url)s/content_status_modify?workflow_action=retirar" category="workflow" icon="">Retornar para privado</action>
   <guard>
    <guard-permission>Review portal content</guard-permission>
@@ -71,7 +71,7 @@
    <guard-group>Administrators</guard-group>
   </guard>
  </transition>
- <transition transition_id="revisao" title="Solicitar revisão" new_state="aguardando_revisao" trigger="USER" before_script="" after_script="">
+ <transition transition_id="revisao" title="Solicitar revisão" new_state="aguardando_revisao" trigger="USER" before_script="" after_script="moveBackObject">
   <action url="%(content_url)s/content_status_modify?workflow_action=revisao" category="workflow" icon="">Solicitar revisão</action>
   <guard>
    <guard-permission>Review portal content</guard-permission>
@@ -146,4 +146,6 @@
   <guard>
   </guard>
  </variable>
+ <script script_id="moveBackObject" type="Script (Python)" filename="workflows/monitoramento_workflow/scripts/moveBackObject.py" module="" function=""/>
+ <script script_id="moveObject" type="Script (Python)" filename="workflows/monitoramento_workflow/scripts/moveObject.py" module="" function=""/>
 </dc-workflow>
