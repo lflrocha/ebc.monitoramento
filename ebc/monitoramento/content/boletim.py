@@ -51,9 +51,9 @@ BoletimSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
     atapi.TextField(
         'sumario',
         storage=atapi.AnnotationStorage(),
-        widget=atapi.TextAreaWidget(
+        widget=atapi.RichWidget(
             label=_(u"Sumário"),
-            rows=3,            
+            rows=10,            
         ),
         allowable_content_types="('text/html','text/plain')",
         default_output_type="text/html",        
