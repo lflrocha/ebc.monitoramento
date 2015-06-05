@@ -43,7 +43,7 @@
         <div class="field noticias"
              tal:define="noticias here/getDestaques">
           <tal:cond condition="noticias">
-            <span class="subtitulo">Destaques</span><br />
+            <span class="subtitulo">Destaques</span><br /><br />
 
             <tal:rep repeat="noticia noticias">
 
@@ -87,7 +87,7 @@
         <div class="field noticias"
              tal:define="noticias here/getPolitica">
           <tal:cond condition="noticias">
-            <span class="subtitulo">Política</span><br />
+            <span class="subtitulo">Política</span><br /><br />
 
             <tal:rep repeat="noticia noticias">
 
@@ -132,7 +132,7 @@
         <div class="field noticias"
              tal:define="noticias here/getEconomia">
           <tal:cond condition="noticias">
-            <span class="subtitulo">Economia</span><br />
+            <span class="subtitulo">Economia</span><br /><br />
 
             <tal:rep repeat="noticia noticias">
 
@@ -176,7 +176,7 @@
         <div class="field noticias"
              tal:define="noticias here/getBrasil">
           <tal:cond condition="noticias">
-            <span class="subtitulo">Brasil</span><br />
+            <span class="subtitulo">Brasil</span><br /><br />
 
             <tal:rep repeat="noticia noticias">
 
@@ -221,7 +221,7 @@
         <div class="field noticias"
              tal:define="noticias here/getMundo">
           <tal:cond condition="noticias">
-            <span class="subtitulo">Mundo</span><br />
+            <span class="subtitulo">Mundo</span><br /><br />
 
             <tal:rep repeat="noticia noticias">
 
@@ -265,7 +265,7 @@
         <div class="field noticias"
              tal:define="noticias here/getSaude">
           <tal:cond condition="noticias">
-            <span class="subtitulo">Saúde</span><br />
+            <span class="subtitulo">Saúde</span><br /><br />
 
             <tal:rep repeat="noticia noticias">
 
@@ -309,7 +309,7 @@
         <div class="field noticias"
              tal:define="noticias here/getEducacao">
           <tal:cond condition="noticias">
-            <span class="subtitulo">Educação</span><br />
+            <span class="subtitulo">Educação</span><br /><br />
 
             <tal:rep repeat="noticia noticias">
 
@@ -354,7 +354,7 @@
              tal:define="noticias here/getSeguranca">
 
           <tal:cond condition="noticias">
-            <span class="subtitulo">Segurança</span><br />
+            <span class="subtitulo">Segurança</span><br /><br />
 
 
             <tal:rep repeat="noticia noticias">
@@ -400,7 +400,7 @@
              tal:define="noticias here/getOutras">
 
           <tal:cond condition="noticias">
-            <span class="subtitulo">Outras</span><br />
+            <span class="subtitulo">Outras</span><br /><br />
             
             <tal:rep repeat="noticia noticias">
 
