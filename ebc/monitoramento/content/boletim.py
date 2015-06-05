@@ -58,18 +58,122 @@ BoletimSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
     ),
 
     atapi.ReferenceField(
-        'noticias',
+        'destaques',
         storage=atapi.AnnotationStorage(),
         widget=ReferenceBrowserWidget(
-            label=_(u"Notícias"),
-            startup_directory="/monitoramento/noticias"
+            label=_(u"Destaques"),
+            base_query={'portal_type':'Noticia','review_state':'Liberado','path':'{ "query": "monitoramento/noticias" }'}
         ),
-        required=True,
         relationship='boletim_noticias',
         allowed_types=('Noticia',), # specify portal type names here ('Example Type',)
         multiValued=True,
     ),
 
+    atapi.ReferenceField(
+        'politica',
+        storage=atapi.AnnotationStorage(),
+        widget=ReferenceBrowserWidget(
+            label=_(u"Política"),
+            startup_directory="/monitoramento/noticias/politica",
+            allow_search=False,
+            show_results_without_query=1,
+        ),
+        relationship='boletim_noticias',
+        allowed_types=('Noticia',), # specify portal type names here ('Example Type',)
+        multiValued=True,
+    ),
+    
+    atapi.ReferenceField(
+        'economia',
+        storage=atapi.AnnotationStorage(),
+        widget=ReferenceBrowserWidget(
+            label=_(u"Economia"),
+            allow_search=False,
+            startup_directory="/monitoramento/noticias/economia"
+        ),
+        relationship='boletim_noticias',
+        allowed_types=('Noticia',), # specify portal type names here ('Example Type',)
+        multiValued=True,
+    ),
+    
+    atapi.ReferenceField(
+        'brasil',
+        storage=atapi.AnnotationStorage(),
+        widget=ReferenceBrowserWidget(
+            label=_(u"Brasil"),
+            allow_search=False,
+            startup_directory="/monitoramento/noticias/brasil"
+        ),
+        relationship='boletim_noticias',
+        allowed_types=('Noticia',), # specify portal type names here ('Example Type',)
+        multiValued=True,
+    ),
+    
+    atapi.ReferenceField(
+        'mundo',
+        storage=atapi.AnnotationStorage(),
+        widget=ReferenceBrowserWidget(
+            label=_(u"Mundo"),
+            allow_search=False,
+            startup_directory="/monitoramento/noticias/mundo"
+        ),
+        relationship='boletim_noticias',
+        allowed_types=('Noticia',), # specify portal type names here ('Example Type',)
+        multiValued=True,
+    ),
+    
+    atapi.ReferenceField(
+        'saude',
+        storage=atapi.AnnotationStorage(),
+        widget=ReferenceBrowserWidget(
+            label=_(u"Saúde"),
+            allow_search=False,
+            startup_directory="/monitoramento/noticias/saude"
+        ),
+        relationship='boletim_noticias',
+        allowed_types=('Noticia',), # specify portal type names here ('Example Type',)
+        multiValued=True,
+    ),
+    
+    atapi.ReferenceField(
+        'educacao',
+        storage=atapi.AnnotationStorage(),
+        widget=ReferenceBrowserWidget(
+            label=_(u"Educação"),
+            allow_search=False,
+            startup_directory="/monitoramento/noticias/educacao"
+        ),
+        relationship='boletim_noticias',
+        allowed_types=('Noticia',), # specify portal type names here ('Example Type',)
+        multiValued=True,
+    ),
+    
+    atapi.ReferenceField(
+        'seguranca',
+        storage=atapi.AnnotationStorage(),
+        widget=ReferenceBrowserWidget(
+            label=_(u"Segurança"),
+            allow_search=False,
+            startup_directory="/monitoramento/noticias/seguranca"
+        ),
+        relationship='boletim_noticias',
+        allowed_types=('Noticia',), # specify portal type names here ('Example Type',)
+        multiValued=True,
+    ),    
+
+    atapi.ReferenceField(
+        'outras',
+        storage=atapi.AnnotationStorage(),
+        widget=ReferenceBrowserWidget(
+            label=_(u"Outras"),
+            allow_search=False,
+            startup_directory="/monitoramento/noticias/outro"
+        ),
+        relationship='boletim_noticias',
+        allowed_types=('Noticia',), # specify portal type names here ('Example Type',)
+        multiValued=True,
+    ),    
+                        
 ))
 
 # Set storage on fields copied from ATContentTypeSchema, making sure
@@ -106,7 +210,15 @@ class Boletim(base.ATCTContent):
     tipo = atapi.ATFieldProperty('tipo')
     data = atapi.ATFieldProperty('data')
     sumario = atapi.ATFieldProperty('sumario')
-    noticias = atapi.ATReferenceFieldProperty('noticias')
+    destaques = atapi.ATReferenceFieldProperty('destaques')
+    politica = atapi.ATReferenceFieldProperty('politica')
+    economia = atapi.ATReferenceFieldProperty('economia')
+    brasil = atapi.ATReferenceFieldProperty('brasil')
+    mundo = atapi.ATReferenceFieldProperty('mundo')
+    saude = atapi.ATReferenceFieldProperty('saude')
+    educacao = atapi.ATReferenceFieldProperty('educacao')
+    seguranca = atapi.ATReferenceFieldProperty('seguranca')
+    outras = atapi.ATReferenceFieldProperty('outras')
 
     def getDefaultTime(self):
         return DateTime()
@@ -126,6 +238,10 @@ class Boletim(base.ATCTContent):
         if tipo:
             t = dict[tipo[0]]
         return t
-
+        
+    def getDestaques(self):
+        cat = getToolByName(self, 'portal_catalog')
+        destaques = cat.searchResults(Type='Noticia',path={ 'query': 'monitoramento/noticias' }, review_state='Liberado')
+        return destaques
 
 atapi.registerType(Boletim, PROJECTNAME)
