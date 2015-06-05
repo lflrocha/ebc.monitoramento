@@ -60,9 +60,6 @@
                 </div>
 
                 <div class="field hora">
-                  <tal:cond condition="python:noticia.getEditoriaStr() != 'Outro'">
-                    <span tal:replace="structure noticia/getEditoriaStr" /><br />
-                  </tal:cond>
                   <span tal:replace="noticia/getDataStr" /> - 
                   <span tal:replace="noticia/getHoraStr" /><br />
                   <span tal:replace="structure noticia/getReporter" />
@@ -104,9 +101,6 @@
                 </div>
 
                 <div class="field hora">
-                  <tal:cond condition="python:noticia.getEditoriaStr() != 'Outro'">
-                    <span tal:replace="structure noticia/getEditoriaStr" /><br />
-                  </tal:cond>
                   <span tal:replace="noticia/getDataStr" /> - 
                   <span tal:replace="noticia/getHoraStr" /><br />
                   <span tal:replace="structure noticia/getReporter" />
@@ -149,9 +143,6 @@
                 </div>
 
                 <div class="field hora">
-                  <tal:cond condition="python:noticia.getEditoriaStr() != 'Outro'">
-                    <span tal:replace="structure noticia/getEditoriaStr" /><br />
-                  </tal:cond>
                   <span tal:replace="noticia/getDataStr" /> - 
                   <span tal:replace="noticia/getHoraStr" /><br />
                   <span tal:replace="structure noticia/getReporter" />
@@ -193,9 +184,6 @@
                 </div>
 
                 <div class="field hora">
-                  <tal:cond condition="python:noticia.getEditoriaStr() != 'Outro'">
-                    <span tal:replace="structure noticia/getEditoriaStr" /><br />
-                  </tal:cond>
                   <span tal:replace="noticia/getDataStr" /> - 
                   <span tal:replace="noticia/getHoraStr" /><br />
                   <span tal:replace="structure noticia/getReporter" />
@@ -238,9 +226,6 @@
                 </div>
 
                 <div class="field hora">
-                  <tal:cond condition="python:noticia.getEditoriaStr() != 'Outro'">
-                    <span tal:replace="structure noticia/getEditoriaStr" /><br />
-                  </tal:cond>
                   <span tal:replace="noticia/getDataStr" /> - 
                   <span tal:replace="noticia/getHoraStr" /><br />
                   <span tal:replace="structure noticia/getReporter" />
@@ -282,9 +267,6 @@
                 </div>
 
                 <div class="field hora">
-                  <tal:cond condition="python:noticia.getEditoriaStr() != 'Outro'">
-                    <span tal:replace="structure noticia/getEditoriaStr" /><br />
-                  </tal:cond>
                   <span tal:replace="noticia/getDataStr" /> - 
                   <span tal:replace="noticia/getHoraStr" /><br />
                   <span tal:replace="structure noticia/getReporter" />
@@ -326,9 +308,6 @@
                 </div>
 
                 <div class="field hora">
-                  <tal:cond condition="python:noticia.getEditoriaStr() != 'Outro'">
-                    <span tal:replace="structure noticia/getEditoriaStr" /><br />
-                  </tal:cond>
                   <span tal:replace="noticia/getDataStr" /> - 
                   <span tal:replace="noticia/getHoraStr" /><br />
                   <span tal:replace="structure noticia/getReporter" />
@@ -372,9 +351,6 @@
                 </div>
 
                 <div class="field hora">
-                  <tal:cond condition="python:noticia.getEditoriaStr() != 'Outro'">
-                    <span tal:replace="structure noticia/getEditoriaStr" /><br />
-                  </tal:cond>
                   <span tal:replace="noticia/getDataStr" /> - 
                   <span tal:replace="noticia/getHoraStr" /><br />
                   <span tal:replace="structure noticia/getReporter" />
