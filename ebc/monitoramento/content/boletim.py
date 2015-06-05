@@ -55,7 +55,7 @@ BoletimSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             label=_(u"Sumário"),
             rows=10,            
         ),
-        allowable_content_types="('text/html','text/plain')",
+        allowable_content_types="('text/html',)",
         default_output_type="text/html",        
         searchable=1,
     ),
