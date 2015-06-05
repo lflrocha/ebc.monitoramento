@@ -64,7 +64,7 @@ BoletimSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             label=_(u"Destaques"),
             base_query={'portal_type':'Noticia','review_state':'Liberado','path':'{ "query": "monitoramento/noticias" }'}
         ),
-        relationship='boletim_noticias',
+        relationship='boletim_destaques',
         allowed_types=('Noticia',), # specify portal type names here ('Example Type',)
         multiValued=True,
     ),
@@ -78,7 +78,7 @@ BoletimSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             allow_search=False,
             show_results_without_query=1,
         ),
-        relationship='boletim_noticias',
+        relationship='boletim_politica',
         allowed_types=('Noticia',), # specify portal type names here ('Example Type',)
         multiValued=True,
     ),
@@ -91,7 +91,7 @@ BoletimSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             allow_search=False,
             startup_directory="/monitoramento/noticias/economia"
         ),
-        relationship='boletim_noticias',
+        relationship='boletim_economia',
         allowed_types=('Noticia',), # specify portal type names here ('Example Type',)
         multiValued=True,
     ),
@@ -104,7 +104,7 @@ BoletimSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             allow_search=False,
             startup_directory="/monitoramento/noticias/brasil"
         ),
-        relationship='boletim_noticias',
+        relationship='boletim_brasil',
         allowed_types=('Noticia',), # specify portal type names here ('Example Type',)
         multiValued=True,
     ),
@@ -117,7 +117,7 @@ BoletimSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             allow_search=False,
             startup_directory="/monitoramento/noticias/mundo"
         ),
-        relationship='boletim_noticias',
+        relationship='boletim_mundo',
         allowed_types=('Noticia',), # specify portal type names here ('Example Type',)
         multiValued=True,
     ),
@@ -130,7 +130,7 @@ BoletimSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             allow_search=False,
             startup_directory="/monitoramento/noticias/saude"
         ),
-        relationship='boletim_noticias',
+        relationship='boletim_saude',
         allowed_types=('Noticia',), # specify portal type names here ('Example Type',)
         multiValued=True,
     ),
@@ -143,7 +143,7 @@ BoletimSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             allow_search=False,
             startup_directory="/monitoramento/noticias/educacao"
         ),
-        relationship='boletim_noticias',
+        relationship='boletim_educacao',
         allowed_types=('Noticia',), # specify portal type names here ('Example Type',)
         multiValued=True,
     ),
@@ -156,7 +156,7 @@ BoletimSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             allow_search=False,
             startup_directory="/monitoramento/noticias/seguranca"
         ),
-        relationship='boletim_noticias',
+        relationship='boletim_seguranca',
         allowed_types=('Noticia',), # specify portal type names here ('Example Type',)
         multiValued=True,
     ),    
@@ -169,7 +169,7 @@ BoletimSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
             allow_search=False,
             startup_directory="/monitoramento/noticias/outro"
         ),
-        relationship='boletim_noticias',
+        relationship='boletim_outras',
         allowed_types=('Noticia',), # specify portal type names here ('Example Type',)
         multiValued=True,
     ),    
