@@ -40,6 +40,9 @@
           <span tal:replace="structure here/getSumario" />
         </div>
 
+        <br />
+        <br />
+
         <div class="field noticias"
              tal:define="noticias here/getDestaques">
           <tal:cond condition="noticias">
