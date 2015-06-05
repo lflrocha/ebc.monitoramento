@@ -42,6 +42,8 @@
 
         <div class="field noticias"
              tal:define="noticias here/getDestaques">
+          <tal:cond condition="noticias">
+            <span class="subtitulo">Destaques</span><br />
 
             <tal:rep repeat="noticia noticias">
 
@@ -78,11 +80,14 @@
                 <br />
 
             </tal:rep>
+          </tal:cond>
 
         </div>
 
         <div class="field noticias"
              tal:define="noticias here/getPolitica">
+          <tal:cond condition="noticias">
+            <span class="subtitulo">Política</span><br />
 
             <tal:rep repeat="noticia noticias">
 
@@ -119,12 +124,15 @@
                 <br />
 
             </tal:rep>
+          </tal:cond>
 
         </div>
 
 
         <div class="field noticias"
              tal:define="noticias here/getEconomia">
+          <tal:cond condition="noticias">
+            <span class="subtitulo">Economia</span><br />
 
             <tal:rep repeat="noticia noticias">
 
@@ -161,11 +169,14 @@
                 <br />
 
             </tal:rep>
+          </tal:cond>
 
         </div>
 
         <div class="field noticias"
              tal:define="noticias here/getBrasil">
+          <tal:cond condition="noticias">
+            <span class="subtitulo">Brasil</span><br />
 
             <tal:rep repeat="noticia noticias">
 
@@ -202,12 +213,15 @@
                 <br />
 
             </tal:rep>
+          </tal:cond>
 
         </div>
 
 
         <div class="field noticias"
              tal:define="noticias here/getMundo">
+          <tal:cond condition="noticias">
+            <span class="subtitulo">Mundo</span><br />
 
             <tal:rep repeat="noticia noticias">
 
@@ -244,11 +258,14 @@
                 <br />
 
             </tal:rep>
+          </tal:cond>
 
         </div>
 
         <div class="field noticias"
              tal:define="noticias here/getSaude">
+          <tal:cond condition="noticias">
+            <span class="subtitulo">Saúde</span><br />
 
             <tal:rep repeat="noticia noticias">
 
@@ -285,11 +302,14 @@
                 <br />
 
             </tal:rep>
+          </tal:cond>
 
         </div>
 
         <div class="field noticias"
              tal:define="noticias here/getEducacao">
+          <tal:cond condition="noticias">
+            <span class="subtitulo">Educação</span><br />
 
             <tal:rep repeat="noticia noticias">
 
@@ -326,12 +346,17 @@
                 <br />
 
             </tal:rep>
+          </tal:cond>
 
         </div>
         
         <div class="field noticias"
              tal:define="noticias here/getSeguranca">
 
+          <tal:cond condition="noticias">
+            <span class="subtitulo">Segurança</span><br />
+
+
             <tal:rep repeat="noticia noticias">
 
                 <div class="field veiculo">
@@ -367,12 +392,16 @@
                 <br />
 
             </tal:rep>
+          </tal:cond>
 
         </div>        
 
         <div class="field noticias"
              tal:define="noticias here/getOutras">
 
+          <tal:cond condition="noticias">
+            <span class="subtitulo">Outras</span><br />
+            
             <tal:rep repeat="noticia noticias">
 
                 <div class="field veiculo">
@@ -388,9 +417,6 @@
                 </div>
 
                 <div class="field hora">
-                  <tal:cond condition="python:noticia.getEditoriaStr() != 'Outro'">
-                    <span tal:replace="structure noticia/getEditoriaStr" /><br />
-                  </tal:cond>
                   <span tal:replace="noticia/getDataStr" /> - 
                   <span tal:replace="noticia/getHoraStr" /><br />
                   <span tal:replace="structure noticia/getReporter" />
@@ -408,7 +434,7 @@
                 <br />
 
             </tal:rep>
-
+          </tal:cond>
         </div>        
 
         <div tal:replace="structure provider:plone.belowcontentbody" />
