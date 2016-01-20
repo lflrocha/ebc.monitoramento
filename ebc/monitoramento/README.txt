@@ -48,6 +48,375 @@ Finally, let's return to the front page of our site before continuing
     >>> browser.open(portal_url)
 
 -*- extra stuff goes here -*-
+The Assunto content type
+===============================
+
+In this section we are tesing the Assunto content type by performing
+basic operations like adding, updadating and deleting Assunto content
+items.
+
+Adding a new Assunto content item
+--------------------------------
+
+We use the 'Add new' menu to add a new content item.
+
+    >>> browser.getLink('Add new').click()
+
+Then we select the type of item we want to add. In this case we select
+'Assunto' and click the 'Add' button to get to the add form.
+
+    >>> browser.getControl('Assunto').click()
+    >>> browser.getControl(name='form.button.Add').click()
+    >>> 'Assunto' in browser.contents
+    True
+
+Now we fill the form and submit it.
+
+    >>> browser.getControl(name='title').value = 'Assunto Sample'
+    >>> browser.getControl('Save').click()
+    >>> 'Changes saved' in browser.contents
+    True
+
+And we are done! We added a new 'Assunto' content item to the portal.
+
+Updating an existing Assunto content item
+---------------------------------------
+
+Let's click on the 'edit' tab and update the object attribute values.
+
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl(name='title').value = 'New Assunto Sample'
+    >>> browser.getControl('Save').click()
+
+We check that the changes were applied.
+
+    >>> 'Changes saved' in browser.contents
+    True
+    >>> 'New Assunto Sample' in browser.contents
+    True
+
+Removing a/an Assunto content item
+--------------------------------
+
+If we go to the home page, we can see a tab with the 'New Assunto
+Sample' title in the global navigation tabs.
+
+    >>> browser.open(portal_url)
+    >>> 'New Assunto Sample' in browser.contents
+    True
+
+Now we are going to delete the 'New Assunto Sample' object. First we
+go to the contents tab and select the 'New Assunto Sample' for
+deletion.
+
+    >>> browser.getLink('Contents').click()
+    >>> browser.getControl('New Assunto Sample').click()
+
+We click on the 'Delete' button.
+
+    >>> browser.getControl('Delete').click()
+    >>> 'Item(s) deleted' in browser.contents
+    True
+
+So, if we go back to the home page, there is no longer a 'New Assunto
+Sample' tab.
+
+    >>> browser.open(portal_url)
+    >>> 'New Assunto Sample' in browser.contents
+    False
+
+Adding a new Assunto content item as contributor
+------------------------------------------------
+
+Not only site managers are allowed to add Assunto content items, but
+also site contributors.
+
+Let's logout and then login as 'contributor', a portal member that has the
+contributor role assigned.
+
+    >>> browser.getLink('Log out').click()
+    >>> browser.open(portal_url + '/login_form')
+    >>> browser.getControl(name='__ac_name').value = 'contributor'
+    >>> browser.getControl(name='__ac_password').value = default_password
+    >>> browser.getControl(name='submit').click()
+    >>> browser.open(portal_url)
+
+We use the 'Add new' menu to add a new content item.
+
+    >>> browser.getLink('Add new').click()
+
+We select 'Assunto' and click the 'Add' button to get to the add form.
+
+    >>> browser.getControl('Assunto').click()
+    >>> browser.getControl(name='form.button.Add').click()
+    >>> 'Assunto' in browser.contents
+    True
+
+Now we fill the form and submit it.
+
+    >>> browser.getControl(name='title').value = 'Assunto Sample'
+    >>> browser.getControl('Save').click()
+    >>> 'Changes saved' in browser.contents
+    True
+
+Done! We added a new Assunto content item logged in as contributor.
+
+Finally, let's login back as manager.
+
+    >>> browser.getLink('Log out').click()
+    >>> browser.open(portal_url + '/login_form')
+    >>> browser.getControl(name='__ac_name').value = portal_owner
+    >>> browser.getControl(name='__ac_password').value = default_password
+    >>> browser.getControl(name='submit').click()
+    >>> browser.open(portal_url)
+
+
+The Boletim content type
+===============================
+
+In this section we are tesing the Boletim content type by performing
+basic operations like adding, updadating and deleting Boletim content
+items.
+
+Adding a new Boletim content item
+--------------------------------
+
+We use the 'Add new' menu to add a new content item.
+
+    >>> browser.getLink('Add new').click()
+
+Then we select the type of item we want to add. In this case we select
+'Boletim' and click the 'Add' button to get to the add form.
+
+    >>> browser.getControl('Boletim').click()
+    >>> browser.getControl(name='form.button.Add').click()
+    >>> 'Boletim' in browser.contents
+    True
+
+Now we fill the form and submit it.
+
+    >>> browser.getControl(name='title').value = 'Boletim Sample'
+    >>> browser.getControl('Save').click()
+    >>> 'Changes saved' in browser.contents
+    True
+
+And we are done! We added a new 'Boletim' content item to the portal.
+
+Updating an existing Boletim content item
+---------------------------------------
+
+Let's click on the 'edit' tab and update the object attribute values.
+
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl(name='title').value = 'New Boletim Sample'
+    >>> browser.getControl('Save').click()
+
+We check that the changes were applied.
+
+    >>> 'Changes saved' in browser.contents
+    True
+    >>> 'New Boletim Sample' in browser.contents
+    True
+
+Removing a/an Boletim content item
+--------------------------------
+
+If we go to the home page, we can see a tab with the 'New Boletim
+Sample' title in the global navigation tabs.
+
+    >>> browser.open(portal_url)
+    >>> 'New Boletim Sample' in browser.contents
+    True
+
+Now we are going to delete the 'New Boletim Sample' object. First we
+go to the contents tab and select the 'New Boletim Sample' for
+deletion.
+
+    >>> browser.getLink('Contents').click()
+    >>> browser.getControl('New Boletim Sample').click()
+
+We click on the 'Delete' button.
+
+    >>> browser.getControl('Delete').click()
+    >>> 'Item(s) deleted' in browser.contents
+    True
+
+So, if we go back to the home page, there is no longer a 'New Boletim
+Sample' tab.
+
+    >>> browser.open(portal_url)
+    >>> 'New Boletim Sample' in browser.contents
+    False
+
+Adding a new Boletim content item as contributor
+------------------------------------------------
+
+Not only site managers are allowed to add Boletim content items, but
+also site contributors.
+
+Let's logout and then login as 'contributor', a portal member that has the
+contributor role assigned.
+
+    >>> browser.getLink('Log out').click()
+    >>> browser.open(portal_url + '/login_form')
+    >>> browser.getControl(name='__ac_name').value = 'contributor'
+    >>> browser.getControl(name='__ac_password').value = default_password
+    >>> browser.getControl(name='submit').click()
+    >>> browser.open(portal_url)
+
+We use the 'Add new' menu to add a new content item.
+
+    >>> browser.getLink('Add new').click()
+
+We select 'Boletim' and click the 'Add' button to get to the add form.
+
+    >>> browser.getControl('Boletim').click()
+    >>> browser.getControl(name='form.button.Add').click()
+    >>> 'Boletim' in browser.contents
+    True
+
+Now we fill the form and submit it.
+
+    >>> browser.getControl(name='title').value = 'Boletim Sample'
+    >>> browser.getControl('Save').click()
+    >>> 'Changes saved' in browser.contents
+    True
+
+Done! We added a new Boletim content item logged in as contributor.
+
+Finally, let's login back as manager.
+
+    >>> browser.getLink('Log out').click()
+    >>> browser.open(portal_url + '/login_form')
+    >>> browser.getControl(name='__ac_name').value = portal_owner
+    >>> browser.getControl(name='__ac_password').value = default_password
+    >>> browser.getControl(name='submit').click()
+    >>> browser.open(portal_url)
+
+
+The Assunto content type
+===============================
+
+In this section we are tesing the Assunto content type by performing
+basic operations like adding, updadating and deleting Assunto content
+items.
+
+Adding a new Assunto content item
+--------------------------------
+
+We use the 'Add new' menu to add a new content item.
+
+    >>> browser.getLink('Add new').click()
+
+Then we select the type of item we want to add. In this case we select
+'Assunto' and click the 'Add' button to get to the add form.
+
+    >>> browser.getControl('Assunto').click()
+    >>> browser.getControl(name='form.button.Add').click()
+    >>> 'Assunto' in browser.contents
+    True
+
+Now we fill the form and submit it.
+
+    >>> browser.getControl(name='title').value = 'Assunto Sample'
+    >>> browser.getControl('Save').click()
+    >>> 'Changes saved' in browser.contents
+    True
+
+And we are done! We added a new 'Assunto' content item to the portal.
+
+Updating an existing Assunto content item
+---------------------------------------
+
+Let's click on the 'edit' tab and update the object attribute values.
+
+    >>> browser.getLink('Edit').click()
+    >>> browser.getControl(name='title').value = 'New Assunto Sample'
+    >>> browser.getControl('Save').click()
+
+We check that the changes were applied.
+
+    >>> 'Changes saved' in browser.contents
+    True
+    >>> 'New Assunto Sample' in browser.contents
+    True
+
+Removing a/an Assunto content item
+--------------------------------
+
+If we go to the home page, we can see a tab with the 'New Assunto
+Sample' title in the global navigation tabs.
+
+    >>> browser.open(portal_url)
+    >>> 'New Assunto Sample' in browser.contents
+    True
+
+Now we are going to delete the 'New Assunto Sample' object. First we
+go to the contents tab and select the 'New Assunto Sample' for
+deletion.
+
+    >>> browser.getLink('Contents').click()
+    >>> browser.getControl('New Assunto Sample').click()
+
+We click on the 'Delete' button.
+
+    >>> browser.getControl('Delete').click()
+    >>> 'Item(s) deleted' in browser.contents
+    True
+
+So, if we go back to the home page, there is no longer a 'New Assunto
+Sample' tab.
+
+    >>> browser.open(portal_url)
+    >>> 'New Assunto Sample' in browser.contents
+    False
+
+Adding a new Assunto content item as contributor
+------------------------------------------------
+
+Not only site managers are allowed to add Assunto content items, but
+also site contributors.
+
+Let's logout and then login as 'contributor', a portal member that has the
+contributor role assigned.
+
+    >>> browser.getLink('Log out').click()
+    >>> browser.open(portal_url + '/login_form')
+    >>> browser.getControl(name='__ac_name').value = 'contributor'
+    >>> browser.getControl(name='__ac_password').value = default_password
+    >>> browser.getControl(name='submit').click()
+    >>> browser.open(portal_url)
+
+We use the 'Add new' menu to add a new content item.
+
+    >>> browser.getLink('Add new').click()
+
+We select 'Assunto' and click the 'Add' button to get to the add form.
+
+    >>> browser.getControl('Assunto').click()
+    >>> browser.getControl(name='form.button.Add').click()
+    >>> 'Assunto' in browser.contents
+    True
+
+Now we fill the form and submit it.
+
+    >>> browser.getControl(name='title').value = 'Assunto Sample'
+    >>> browser.getControl('Save').click()
+    >>> 'Changes saved' in browser.contents
+    True
+
+Done! We added a new Assunto content item logged in as contributor.
+
+Finally, let's login back as manager.
+
+    >>> browser.getLink('Log out').click()
+    >>> browser.open(portal_url + '/login_form')
+    >>> browser.getControl(name='__ac_name').value = portal_owner
+    >>> browser.getControl(name='__ac_password').value = default_password
+    >>> browser.getControl(name='submit').click()
+    >>> browser.open(portal_url)
+
+
 The Boletim content type
 ===============================
 
