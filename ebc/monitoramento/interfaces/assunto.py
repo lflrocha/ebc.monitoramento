@@ -7,6 +7,17 @@ from ebc.monitoramento import monitoramentoMessageFactory as _
 
 
 class IAssunto(Interface):
-    """Description of the Example Type"""
+    """ """
 
     # -*- schema definition goes here -*-
+    links = schema.Object(
+        title=_(u"Links"),
+        schema=Interface, # specify the interface(s) of the addable types here
+    )
+#
+
+    notic = schema.Object(
+        title=_(u"Noticias"),
+        schema=Interface, # specify the interface(s) of the addable types here
+    )
+#

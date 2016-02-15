@@ -68,26 +68,14 @@ NoticiaSchema = schemata.ATContentTypeSchema.copy() + atapi.Schema((
         'data',
         storage=atapi.AnnotationStorage(),
         widget=atapi.CalendarWidget(
-            label=_(u"Data e Hora"),
-            format='%d/%m/%Y %H:%M',
-            starting_year='2015',
+            label=_(u"Data"),
+            format='%d/%m/%Y',
+            starting_year='2016',
             minute_step=1,            
         ),
         required='true',
         default_method = 'getDefaultTime',
         validators=('isValidDate'),
-    ),
-
-    atapi.TextField(
-        'reporter',
-        storage=atapi.AnnotationStorage(),
-        widget=atapi.TextAreaWidget(
-            label=_(u"Repórter"),
-            rows=3,            
-        ),
-        allowable_content_types=('text/plain',),
-        default_output_type="text/html",
-        searchable=1,
     ),
 
     atapi.TextField(
@@ -121,6 +109,11 @@ NoticiaSchema['rights'].widget.visible = {"edit": "invisible", "view": "invisibl
 NoticiaSchema['allowDiscussion'].widget.visible = {"edit": "invisible", "view": "invisible"}
 NoticiaSchema['excludeFromNav'].widget.visible = {"edit": "invisible", "view": "invisible"}
 
+NoticiaSchema['subject'].widget.visible = {"edit": "invisible", "view": "invisible"}
+NoticiaSchema['relatedItems'].widget.visible = {"edit": "invisible", "view": "invisible"}
+
+
+
 
 
 schemata.finalizeATCTSchema(NoticiaSchema, moveDiscussion=False)
@@ -142,7 +135,6 @@ class Noticia(base.ATCTContent):
     veiculo = atapi.ATFieldProperty('veiculo')
     sutia = atapi.ATFieldProperty('sutia')
     data = atapi.ATFieldProperty('data')
-    reporter = atapi.ATFieldProperty('reporter')
     noticia = atapi.ATFieldProperty('noticia')
 
     def getDefaultTime(self):

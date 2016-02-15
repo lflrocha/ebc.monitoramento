@@ -4,6 +4,8 @@
 
 from zope.interface import implements
 from DateTime.DateTime import *
+from string import join
+
 
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content import folder
@@ -60,20 +62,17 @@ BoletimSchema = folder.ATFolderSchema.copy() + atapi.Schema((
     ),
 
 
-
-
-
-
-
-
 ))
 
 # Set storage on fields copied from ATFolderSchema, making sure
 # they work well with the python bridge properties.
 
 BoletimSchema['title'].storage = atapi.AnnotationStorage()
+BoletimSchema['title'].required = False
 BoletimSchema['description'].storage = atapi.AnnotationStorage()
 
+BoletimSchema['subject'].widget.visible = {"edit": "invisible", "view": "invisible"}
+BoletimSchema['nextPreviousEnabled'].widget.visible = {"edit": "invisible", "view": "invisible"}
 BoletimSchema['description'].widget.visible = {"edit": "invisible", "view": "invisible"}
 BoletimSchema['location'].widget.visible = {"edit": "invisible", "view": "invisible"}
 BoletimSchema['language'].widget.visible = {"edit": "invisible", "view": "invisible"}
@@ -100,6 +99,8 @@ class Boletim(folder.ATFolder):
     meta_type = "Boletim"
     schema = BoletimSchema
 
+    _at_rename_after_creation = False
+
     title = atapi.ATFieldProperty('title')
     description = atapi.ATFieldProperty('description')
 
@@ -107,7 +108,6 @@ class Boletim(folder.ATFolder):
     sumario = atapi.ATFieldProperty('sumario')
     data = atapi.ATFieldProperty('data')
     tipo = atapi.ATFieldProperty('tipo')
-
 
     def getDefaultTime(self):
         return DateTime()
@@ -128,6 +128,18 @@ class Boletim(folder.ATFolder):
             t = dict[tipo[0]]
         return t
 
+    def getAssuntos(self):
+        pc = getToolByName(self, 'portal_catalog')
+        path = join(self.getPhysicalPath(), '/') 
+        assuntos = pc.searchResults(path=path,Type="Assunto",sort_on='getObjPositionInParent')
+        return assuntos
+
+    def at_post_create_script(self):
+        if self.Title() != '':
+            self.setTitle(self.getTipoStr() + ' - ' + self.getDataStr() + ' - ' + self.getHoraStr()  + ' - ' + self.Title())
+        else:
+            self.setTitle(self.getTipoStr() + ' - ' + self.getDataStr() + ' - ' + self.getHoraStr())
+        self.reindexObject(idxs=["Title"])
 
 
 atapi.registerType(Boletim, PROJECTNAME)

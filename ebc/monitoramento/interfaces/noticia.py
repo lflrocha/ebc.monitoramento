@@ -7,7 +7,7 @@ from ebc.monitoramento import monitoramentoMessageFactory as _
 
 
 class INoticia(Interface):
-    """Description of the Example Type"""
+    """ """
 
     # -*- schema definition goes here -*-
     link = schema.TextLine(
@@ -18,7 +18,6 @@ class INoticia(Interface):
     editoria = schema.List(
         title=_(u"Editoria"),
         required=True,
-        description=_(u"Field description"),
     )
 #
     noticia = schema.Text(
@@ -26,13 +25,8 @@ class INoticia(Interface):
         required=False,
     )
 #
-    reporter = schema.Text(
-        title=_(u"Reporter"),
-        required=False,
-    )
-#
     data = schema.Date(
-        title=_(u"Data e Hora"),
+        title=_(u"Data"),
         required=False,
     )
 #

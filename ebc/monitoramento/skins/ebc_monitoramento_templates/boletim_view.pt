@@ -29,8 +29,6 @@
         <br />
 
         <div class="field boletim">
-          <span tal:replace="here/getDataStr" /> - 
-          <span tal:replace="here/getHoraStr" /> - 
           <span tal:replace="here/Title" />
         </div>
 
@@ -40,381 +38,68 @@
           <span tal:replace="structure here/getSumario" />
         </div>
 
-        <br />
-        <br />
 
-        <div class="field noticias"
-             tal:define="noticias here/getDestaques">
-          <tal:cond condition="noticias">
-            <span class="subtitulo">Destaques</span><br /><br />
+        <div class="field"
+             tal:define="assuntos python:here.getAssuntos();">
+            <ul id="assunto">
+            <tal:rep repeat="assunto assuntos">
+                <span class="subtitulo" tal:content="structure assunto/Title"></span> - 
+                <a tal:attributes="href string:${assunto/id}/edit">(Editar)</a>
+                <br><br>
+                <tal:def define="noticias assunto/getNotic;
+                                 links assunto/getLinks;">
+                    <div class="noticia" tal:repeat="noticia noticias">
 
-            <tal:rep repeat="noticia noticias">
+                        <div class="field veiculo">
+                          <span tal:replace="structure noticia/getVeiculoStr" />
+                        </div>
 
-                <div class="field veiculo">
-                  <span tal:replace="structure noticia/getVeiculoStr" />
-                </div>
+                        <div class="field manchete">
+                          <span tal:replace="structure noticia/Title" />
+                        </div>
 
-                <div class="field manchete">
-                  <span tal:replace="structure noticia/Title" />
-                </div>
+                        <div class="field sutia" tal:condition="noticia/getSutia">
+                          <span tal:replace="structure noticia/getSutia" />
+                        </div>
 
-                <div class="field sutia">
-                  <span tal:replace="structure noticia/getSutia" />
-                </div>
+                        <div class="field hora">
+                          <span tal:replace="noticia/getDataStr" /> - 
+                          <span tal:replace="noticia/getHoraStr" />
+                        </div>
 
-                <div class="field hora">
-                  <span tal:replace="noticia/getDataStr" /> - 
-                  <span tal:replace="noticia/getHoraStr" /><br />
-                  <span tal:replace="structure noticia/getReporter" />
-                </div>
+                        <div class="field noticia">
+                          <span tal:replace="structure noticia/getNoticia" />
+                        </div>
 
-                <div class="field noticia">
-                  <span tal:replace="structure noticia/getNoticia" />
-                </div>
+                        <div class="field link">
+                          <a tal:attributes="href noticia/getLink" tal:content="noticia/getLink" />
+                        </div>
 
-                <div class="field link">
-                  <a tal:attributes="href noticia/getLink" tal:content="noticia/getLink" />
-                </div>
+                    </div>
 
-                <br />
-                <br />
 
+                    <tal:cond condition="links">
+                        <br>
+                        <div class="field veiculo" tal:condition="noticias">
+                            Outros veículos:
+                        </div>
+
+                        <div class="field link">
+                            <tal:ref repeat="link links">
+                                <span tal:content="link/getHoraStr" /> - <span tal:content="link/getVeiculoStr" /> - 
+                                <a tal:attributes="href link/getLink" tal:content="structure link/Title" /><br />
+                            </tal:ref>
+                        </div>
+                    </tal:cond>
+
+                    
+                </tal:def>
+                <br /><br />
             </tal:rep>
-          </tal:cond>
-
-        </div>
-
-        <div class="field noticias"
-             tal:define="noticias here/getPolitica">
-          <tal:cond condition="noticias">
-            <span class="subtitulo">Política</span><br /><br />
-
-            <tal:rep repeat="noticia noticias">
-
-                <div class="field veiculo">
-                  <span tal:replace="structure noticia/getVeiculoStr" />
-                </div>
-
-                <div class="field manchete">
-                  <span tal:replace="structure noticia/Title" />
-                </div>
-
-                <div class="field sutia">
-                  <span tal:replace="structure noticia/getSutia" />
-                </div>
-
-                <div class="field hora">
-                  <span tal:replace="noticia/getDataStr" /> - 
-                  <span tal:replace="noticia/getHoraStr" /><br />
-                  <span tal:replace="structure noticia/getReporter" />
-                </div>
-
-                <div class="field noticia">
-                  <span tal:replace="structure noticia/getNoticia" />
-                </div>
-
-                <div class="field link">
-                  <a tal:attributes="href noticia/getLink" tal:content="noticia/getLink" />
-                </div>
-
-                <br />
-                <br />
-
-            </tal:rep>
-          </tal:cond>
-
+            </ul>
         </div>
 
 
-        <div class="field noticias"
-             tal:define="noticias here/getEconomia">
-          <tal:cond condition="noticias">
-            <span class="subtitulo">Economia</span><br /><br />
-
-            <tal:rep repeat="noticia noticias">
-
-                <div class="field veiculo">
-                  <span tal:replace="structure noticia/getVeiculoStr" />
-                </div>
-
-                <div class="field manchete">
-                  <span tal:replace="structure noticia/Title" />
-                </div>
-
-                <div class="field sutia">
-                  <span tal:replace="structure noticia/getSutia" />
-                </div>
-
-                <div class="field hora">
-                  <span tal:replace="noticia/getDataStr" /> - 
-                  <span tal:replace="noticia/getHoraStr" /><br />
-                  <span tal:replace="structure noticia/getReporter" />
-                </div>
-
-                <div class="field noticia">
-                  <span tal:replace="structure noticia/getNoticia" />
-                </div>
-
-                <div class="field link">
-                  <a tal:attributes="href noticia/getLink" tal:content="noticia/getLink" />
-                </div>
-
-                <br />
-                <br />
-
-            </tal:rep>
-          </tal:cond>
-
-        </div>
-
-        <div class="field noticias"
-             tal:define="noticias here/getBrasil">
-          <tal:cond condition="noticias">
-            <span class="subtitulo">Brasil</span><br /><br />
-
-            <tal:rep repeat="noticia noticias">
-
-                <div class="field veiculo">
-                  <span tal:replace="structure noticia/getVeiculoStr" />
-                </div>
-
-                <div class="field manchete">
-                  <span tal:replace="structure noticia/Title" />
-                </div>
-
-                <div class="field sutia">
-                  <span tal:replace="structure noticia/getSutia" />
-                </div>
-
-                <div class="field hora">
-                  <span tal:replace="noticia/getDataStr" /> - 
-                  <span tal:replace="noticia/getHoraStr" /><br />
-                  <span tal:replace="structure noticia/getReporter" />
-                </div>
-
-                <div class="field noticia">
-                  <span tal:replace="structure noticia/getNoticia" />
-                </div>
-
-                <div class="field link">
-                  <a tal:attributes="href noticia/getLink" tal:content="noticia/getLink" />
-                </div>
-
-                <br />
-                <br />
-
-            </tal:rep>
-          </tal:cond>
-
-        </div>
-
-
-        <div class="field noticias"
-             tal:define="noticias here/getMundo">
-          <tal:cond condition="noticias">
-            <span class="subtitulo">Mundo</span><br /><br />
-
-            <tal:rep repeat="noticia noticias">
-
-                <div class="field veiculo">
-                  <span tal:replace="structure noticia/getVeiculoStr" />
-                </div>
-
-                <div class="field manchete">
-                  <span tal:replace="structure noticia/Title" />
-                </div>
-
-                <div class="field sutia">
-                  <span tal:replace="structure noticia/getSutia" />
-                </div>
-
-                <div class="field hora">
-                  <span tal:replace="noticia/getDataStr" /> - 
-                  <span tal:replace="noticia/getHoraStr" /><br />
-                  <span tal:replace="structure noticia/getReporter" />
-                </div>
-
-                <div class="field noticia">
-                  <span tal:replace="structure noticia/getNoticia" />
-                </div>
-
-                <div class="field link">
-                  <a tal:attributes="href noticia/getLink" tal:content="noticia/getLink" />
-                </div>
-
-                <br />
-                <br />
-
-            </tal:rep>
-          </tal:cond>
-
-        </div>
-
-        <div class="field noticias"
-             tal:define="noticias here/getSaude">
-          <tal:cond condition="noticias">
-            <span class="subtitulo">Saúde</span><br /><br />
-
-            <tal:rep repeat="noticia noticias">
-
-                <div class="field veiculo">
-                  <span tal:replace="structure noticia/getVeiculoStr" />
-                </div>
-
-                <div class="field manchete">
-                  <span tal:replace="structure noticia/Title" />
-                </div>
-
-                <div class="field sutia">
-                  <span tal:replace="structure noticia/getSutia" />
-                </div>
-
-                <div class="field hora">
-                  <span tal:replace="noticia/getDataStr" /> - 
-                  <span tal:replace="noticia/getHoraStr" /><br />
-                  <span tal:replace="structure noticia/getReporter" />
-                </div>
-
-                <div class="field noticia">
-                  <span tal:replace="structure noticia/getNoticia" />
-                </div>
-
-                <div class="field link">
-                  <a tal:attributes="href noticia/getLink" tal:content="noticia/getLink" />
-                </div>
-
-                <br />
-                <br />
-
-            </tal:rep>
-          </tal:cond>
-
-        </div>
-
-        <div class="field noticias"
-             tal:define="noticias here/getEducacao">
-          <tal:cond condition="noticias">
-            <span class="subtitulo">Educação</span><br /><br />
-
-            <tal:rep repeat="noticia noticias">
-
-                <div class="field veiculo">
-                  <span tal:replace="structure noticia/getVeiculoStr" />
-                </div>
-
-                <div class="field manchete">
-                  <span tal:replace="structure noticia/Title" />
-                </div>
-
-                <div class="field sutia">
-                  <span tal:replace="structure noticia/getSutia" />
-                </div>
-
-                <div class="field hora">
-                  <span tal:replace="noticia/getDataStr" /> - 
-                  <span tal:replace="noticia/getHoraStr" /><br />
-                  <span tal:replace="structure noticia/getReporter" />
-                </div>
-
-                <div class="field noticia">
-                  <span tal:replace="structure noticia/getNoticia" />
-                </div>
-
-                <div class="field link">
-                  <a tal:attributes="href noticia/getLink" tal:content="noticia/getLink" />
-                </div>
-
-                <br />
-                <br />
-
-            </tal:rep>
-          </tal:cond>
-
-        </div>
-        
-        <div class="field noticias"
-             tal:define="noticias here/getSeguranca">
-
-          <tal:cond condition="noticias">
-            <span class="subtitulo">Segurança</span><br /><br />
-
-
-            <tal:rep repeat="noticia noticias">
-
-                <div class="field veiculo">
-                  <span tal:replace="structure noticia/getVeiculoStr" />
-                </div>
-
-                <div class="field manchete">
-                  <span tal:replace="structure noticia/Title" />
-                </div>
-
-                <div class="field sutia">
-                  <span tal:replace="structure noticia/getSutia" />
-                </div>
-
-                <div class="field hora">
-                  <span tal:replace="noticia/getDataStr" /> - 
-                  <span tal:replace="noticia/getHoraStr" /><br />
-                  <span tal:replace="structure noticia/getReporter" />
-                </div>
-
-                <div class="field noticia">
-                  <span tal:replace="structure noticia/getNoticia" />
-                </div>
-
-                <div class="field link">
-                  <a tal:attributes="href noticia/getLink" tal:content="noticia/getLink" />
-                </div>
-
-                <br />
-                <br />
-
-            </tal:rep>
-          </tal:cond>
-
-        </div>        
-
-        <div class="field noticias"
-             tal:define="noticias here/getOutras">
-
-          <tal:cond condition="noticias">
-            <span class="subtitulo">Outras</span><br /><br />
-            
-            <tal:rep repeat="noticia noticias">
-
-                <div class="field veiculo">
-                  <span tal:replace="structure noticia/getVeiculoStr" />
-                </div>
-
-                <div class="field manchete">
-                  <span tal:replace="structure noticia/Title" />
-                </div>
-
-                <div class="field sutia">
-                  <span tal:replace="structure noticia/getSutia" />
-                </div>
-
-                <div class="field hora">
-                  <span tal:replace="noticia/getDataStr" /> - 
-                  <span tal:replace="noticia/getHoraStr" /><br />
-                  <span tal:replace="structure noticia/getReporter" />
-                </div>
-
-                <div class="field noticia">
-                  <span tal:replace="structure noticia/getNoticia" />
-                </div>
-
-                <div class="field link">
-                  <a tal:attributes="href noticia/getLink" tal:content="noticia/getLink" />
-                </div>
-
-                <br />
-                <br />
-
-            </tal:rep>
-          </tal:cond>
-        </div>        
 
         <div tal:replace="structure provider:plone.belowcontentbody" />
 

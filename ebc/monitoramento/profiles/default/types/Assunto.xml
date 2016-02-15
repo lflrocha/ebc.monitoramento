@@ -4,9 +4,9 @@
    i18n:domain="ebc.monitoramento" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
   <property name="title" i18n:translate="">Assunto</property>
   <property name="description"
-    i18n:translate="">Description of the Example Type</property>
+    i18n:translate=""></property>
   <property name="content_meta_type">Assunto</property>
-  <property name="content_icon">document_icon.gif</property>
+  <property name="content_icon">assunto_icon.png</property>
   <property name="product">ebc.monitoramento</property>
   <property name="factory">addAssunto</property>
   <property name="immediate_view">atct_edit</property>
@@ -22,7 +22,7 @@
   <alias from="sharing" to="@@sharing" />
   <alias from="view" to="(selected layout)" />
   <action title="View" action_id="view" category="object" condition_expr=""
-    url_expr="string:${object_url}/" visible="True">
+    url_expr="string:${object_url}/aq_parent" visible="True">
     <permission value="View" />
   </action>
   <action title="Edit" action_id="edit" category="object" condition_expr=""
